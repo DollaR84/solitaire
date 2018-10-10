@@ -39,12 +39,12 @@ class ZoneRecall(ZoneBase):
 
     def draw(self, screen):
         """Draw zone on board."""
-        screen.blit(self.zone, self.offset_zone)
         left, top = self.get_coord_zero(0)
         pygame.draw.rect(self.zone, self.color, (left, top, self.card_size[0], self.card_size[1]), 1)
         for index, card in enumerate(self.cards):
             offset = self.get_coord_card(0, index)
             card.draw(self.zone, offset)
+        screen.blit(self.zone, self.offset_zone)
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
@@ -76,12 +76,12 @@ class ZoneDeck(ZoneBase):
 
     def draw(self, screen):
         """Draw zone on board."""
-        screen.blit(self.zone, self.offset_zone)
         left, top = self.get_coord_zero(0)
         pygame.draw.rect(self.zone, self.color, (left, top, self.card_size[0], self.card_size[1]), 1)
         for index, card in enumerate(self.cards):
             offset = self.get_coord_card(0, index)
             card.draw(self.zone, offset)
+        screen.blit(self.zone, self.offset_zone)
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
@@ -114,10 +114,10 @@ class ZoneIncoming(ZoneBase):
 
     def draw(self, screen):
         """Draw zone on board."""
-        screen.blit(self.zone, self.offset_zone)
         for index, card in enumerate(self.cards):
             offset = self.get_coord_card(0, index)
             card.draw(self.zone, offset)
+        screen.blit(self.zone, self.offset_zone)
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
@@ -152,13 +152,13 @@ class ZoneHouse(ZoneBase):
 
     def draw(self, screen):
         """Draw zone on board."""
-        screen.blit(self.zone, self.offset_zone)
         for row_index, row in enumerate(self.rows):
             left, top = self.get_coord_zero(row_index)
             pygame.draw.rect(self.zone, self.color, (left, top, self.card_size[0], self.card_size[1]), 1)
             for index, card in enumerate(row):
                 offset = self.get_coord_card(row_index, index)
                 card.draw(self.zone, offset)
+        screen.blit(self.zone, self.offset_zone)
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
@@ -195,13 +195,13 @@ class ZoneColumns(ZoneBase):
 
     def draw(self, screen):
         """Draw zone on board."""
-        screen.blit(self.zone, self.offset_zone)
         for row_index, row in enumerate(self.rows):
             left, top = self.get_coord_zero(row_index)
             pygame.draw.rect(self.zone, self.color, (left, top, self.card_size[0], self.card_size[1]), 1)
             for index, card in enumerate(row):
                 offset = self.get_coord_card(row_index, index)
                 card.draw(self.zone, offset)
+        screen.blit(self.zone, self.offset_zone)
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""

@@ -128,7 +128,9 @@ class Board:
     def distribution(self):
         """Distribution cards in new game."""
         while self.deck:
-            self.zones[1].cards.append(self.deck.pop())
+            card = self.deck.pop()
+            card.status = False
+            self.zones[1].cards.append(card)
             self.sounds.play('deal')
 
         for start_row in range(len(self.zones[4].rows)):
