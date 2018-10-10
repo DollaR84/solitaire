@@ -21,7 +21,7 @@ class Card:
         self.__SUIT = suit
         self.__WIDTH = width
         self.__HEIGHT = height
-        self.status = False
+        self.__status = False
 
         if 11 == self.__RATE:
             self.__RATE_NAME = 'jack'
@@ -41,10 +41,20 @@ class Card:
 
         self.surface = pygame.Surface((self.__WIDTH, self.__HEIGHT))
 
-    def draw(self, zone, offset):
-        """Draw card on surface."""
+    @property
+    def status(self):
+        """Return status card."""
+        return self.__status
+
+    @status.setter
+    def status(self, value):
+        """Setter for status card."""
+        self.__status = value
         if self.status:
             self.surface.blit(self.tex_face, (0, 0))
         else:
             self.surface.blit(self.tex_back, (0, 0))
+
+    def draw(self, zone, offset):
+        """Draw card on surface."""
         zone.blit(self.surface, offset)
