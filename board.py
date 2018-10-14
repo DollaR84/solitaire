@@ -7,22 +7,16 @@ Created on 01.09.2018
 
 """
 
-import io
-import os
-os.environ['path'] += os.pathsep + os.path.join(os.getcwd(), 'gtk')
-
 import random
 import xml.etree.ElementTree as etree
 
-import cairosvg
-
-import pygame
-
-import zones
+from zones import get_zones
 
 from card import Card
 
 from constants import Colors
+
+from processes import svg2png
 
 
 class Board:
@@ -34,41 +28,30 @@ class Board:
         self.screen = screen
         self.sounds = sounds
 
+        CARD_ROW = 5
+        CARD_COL = 13
         self.card_x = self.config.getint('board', 'card_x')
         self.card_y = self.config.getint('board', 'card_y')
 
         self.deck = []
+        etree.register_namespace("", "http://www.w3.org/2000/svg")
+        etree.register_namespace("xlink", "http://www.w3.org/1999/xlink")
         self.svg = etree.parse('cards.svg')
         root = self.svg.getroot()
-        self.prefix = "{http://www.w3.org/2000/svg}"
-        cards_iter = root.iterfind('./'+self.prefix+'g/')
-        defs_iter = root.iterfind('./'+self.prefix+'defs/')
-        self.svg_cards = {card.attrib['id']: card for card in cards_iter}
+        viewBox = [float(param) for param in root.attrib['viewBox'].split(' ')]
+        START_POS = (viewBox[0], viewBox[1])
+        CARD_SIZE = (viewBox[2]/CARD_COL, viewBox[3]/CARD_ROW)
+        prefix = "{http://www.w3.org/2000/svg}"
+        cards_iter = root.iterfind('./'+prefix+'g/')
+        defs_iter = root.iterfind('./'+prefix+'defs/')
         self.defs = {obj.attrib['id']: obj for obj in defs_iter}
-        self.textures = {name: self.svg2png(svg) for name, svg in self.svg_cards.items()}
+        self.svg_cards = {card.attrib['id']: card for card in cards_iter}
+        joker_addons = [elem for elem in self.svg_cards['joker_black'].findall('./') if prefix+'g' == elem.tag]
+        for addon in joker_addons:
+            self.svg_cards['joker_red'].append(addon)
+        self.textures = svg2png(self.svg_cards, START_POS, CARD_SIZE, self.defs, self.card_x, self.card_y)
 
         self.create_zones()
-
-    def svg2png(self, svg):
-        """Convert svg to png."""
-        root = etree.Element('svg')
-        root.set('version', '1.1')
-        root.set('width', str(self.card_x))
-        root.set('height', str(self.card_y))
-        root.set('viewBox', '0 0 {} {}'.format(self.card_x, self.card_y))
-        defs = etree.SubElement(root, 'defs')
-        for obj in self.defs.values():
-            defs.append(obj)
-        g = etree.SubElement(root, 'g')
-        g.append(svg)
-        if 'joker_red' == svg.attrib['id']:
-            joker_addons = [elem for elem in self.svg_cards['joker_black'].findall('./') if self.prefix+'g' == elem.tag]
-            for addon in joker_addons:
-                svg.append(addon)
-        png = io.BytesIO(cairosvg.svg2png(bytestring=etree.tostring(root)))
-        image = pygame.image.load(png)
-        png.close()
-        return image
 
     def create_deck(self):
         """Create all cards."""
@@ -102,7 +85,7 @@ class Board:
         self.zones = []
         left = 0
         top = 0
-        for index, zone in enumerate(zones.get_zones()):
+        for index, zone in enumerate(get_zones()):
             self.zones.append(zone(left, top, (self.card_x, self.card_y), offset_card, offset_cols))
             if 0 == index:
                 left += 2 * offset_cols + self.card_x + 23 * offset_card_total
