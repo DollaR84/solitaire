@@ -8,10 +8,11 @@ Created on 04.09.2018
 """
 
 import io
-import pickle
 import time
 
 import pygame
+
+import loader
 
 
 class Sound:
@@ -19,11 +20,9 @@ class Sound:
 
     def __init__(self, volume):
         """Initialize sound class."""
-        with open('sounds.dat', 'rb') as file_data:
-            wavs = pickle.load(file_data)
-            self.__sounds = {name: pygame.mixer.Sound(wav) for name, wav in wavs.items()}
-            for sound in self.__sounds.values():
-                sound.set_volume(volume)
+        self.__sounds = {name: pygame.mixer.Sound(wav) for name, wav in loader.sounds().items()}
+        for sound in self.__sounds.values():
+            sound.set_volume(volume)
 
     def get_sound_names(self):
         """Return names all sounds effects."""
@@ -41,8 +40,7 @@ class Music:
 
     def __init__(self, volume):
         """Initialize music class."""
-        with open('music.dat', 'rb') as file_data:
-            self.__music = pickle.load(file_data)
+        self.__music = loader.music()
         pygame.mixer.music.set_volume(volume)
 
     def get_music_names(self):

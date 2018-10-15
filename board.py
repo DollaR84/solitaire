@@ -10,13 +10,13 @@ Created on 01.09.2018
 import random
 import xml.etree.ElementTree as etree
 
+import loader
+
 from zones import get_zones
 
 from card import Card
 
 from constants import Colors
-
-from processes import loader
 
 
 class Board:
@@ -49,7 +49,7 @@ class Board:
         joker_addons = [elem for elem in self.svg_cards['joker_black'].findall('./') if prefix+'g' == elem.tag]
         for addon in joker_addons:
             self.svg_cards['joker_red'].append(addon)
-        self.textures = loader(self.svg_cards, START_POS, CARD_SIZE, self.defs, self.card_x, self.card_y)
+        self.textures = loader.textures(self.svg_cards, START_POS, CARD_SIZE, self.defs, self.card_x, self.card_y)
 
         self.create_zones()
 
