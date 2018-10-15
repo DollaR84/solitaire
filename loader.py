@@ -40,10 +40,12 @@ def __cacher(data, card_x, card_y):
         pickle.dump(cache, save_file)
 
 
-def sounds():
+def sounds(volume):
     """Load sounds wav data from binary file."""
     with open('sounds.dat', 'rb') as file_data:
-        return pickle.load(file_data)
+        wavs = pickle.load(file_data)
+        data = [(name, wav) for name, wav in wavs.items()]
+        return processes.sounds(data, volume)
 
 
 def music():

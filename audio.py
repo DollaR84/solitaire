@@ -20,9 +20,7 @@ class Sound:
 
     def __init__(self, volume):
         """Initialize sound class."""
-        self.__sounds = {name: pygame.mixer.Sound(wav) for name, wav in loader.sounds().items()}
-        for sound in self.__sounds.values():
-            sound.set_volume(volume)
+        self.__sounds = loader.sounds(volume)
 
     def get_sound_names(self):
         """Return names all sounds effects."""
