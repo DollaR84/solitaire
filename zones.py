@@ -25,6 +25,9 @@ class ZoneBase:
         self.color = Colors.YELLOW
         self.offset_zone = (self.LEFT, self.TOP)
 
+        self.current_row = 0
+        self.current_card = 0
+
 
 class ZoneRecall(ZoneBase):
     """Recall zone class for solitaires."""
@@ -32,6 +35,8 @@ class ZoneRecall(ZoneBase):
     def __init__(self, left, top, card_size, offset, offset_cols):
         """Initialize recall class."""
         super().__init__(left, top, card_size, offset[0], offset_cols)
+        self.NAME = 'recall'
+        self.if_rows = False
         self.WIDTH = 2 * offset_cols + card_size[0] + 23 * offset[0]
         self.HEIGHT = 2 * offset_cols + card_size[1] + 51 * offset[0]
         self.zone = pygame.Surface((self.WIDTH, self.HEIGHT))
@@ -69,6 +74,8 @@ class ZoneDeck(ZoneBase):
     def __init__(self, left, top, card_size, offset, offset_cols):
         """Initialize deck class."""
         super().__init__(left, top, card_size, offset[0], offset_cols)
+        self.NAME = 'deck'
+        self.if_rows = False
         self.WIDTH = 2 * offset_cols + card_size[0] + 51 * offset[0]
         self.HEIGHT = 2 * offset_cols + card_size[1] + 51 * offset[0]
         self.zone = pygame.Surface((self.WIDTH, self.HEIGHT))
@@ -106,6 +113,8 @@ class ZoneIncoming(ZoneBase):
     def __init__(self, left, top, card_size, offset, offset_cols):
         """Initialize incoming class."""
         super().__init__(left, top, card_size, offset[0], offset_cols)
+        self.NAME = 'incoming'
+        self.if_rows = False
         self.OFFSET_OPEN = offset[1]
         self.WIDTH = 2 * offset_cols + card_size[0] + 2 * offset[1]
         self.HEIGHT = 2 * offset_cols + card_size[1] + 51 * offset[0]
@@ -142,6 +151,8 @@ class ZoneHouse(ZoneBase):
     def __init__(self, left, top, card_size, offset, offset_cols):
         """Initialize house class."""
         super().__init__(left, top, card_size, offset[0], offset_cols)
+        self.NAME = 'house'
+        self.if_rows = True
         self.WIDTH = 5 * offset_cols + 4 * card_size[0] + 12 * offset[0]
         self.HEIGHT = 2 * offset_cols + card_size[1] + 51 * offset[0]
         self.zone = pygame.Surface((self.WIDTH, self.HEIGHT))
@@ -184,6 +195,8 @@ class ZoneColumns(ZoneBase):
     def __init__(self, left, top, card_size, offset, offset_cols):
         """Initialize columns class."""
         super().__init__(left, top, card_size, offset[0], offset_cols)
+        self.NAME = 'columns'
+        self.if_rows = True
         self.OFFSET_OPEN = offset[1]
         self.WIDTH = 14 * offset_cols + 7 * card_size[0] + 7 * 7 * offset[0]
         self.HEIGHT = 2 * offset_cols + card_size[1] + 7 * offset[0] + 12 * offset[1]
