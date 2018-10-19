@@ -67,9 +67,9 @@ class ZoneRecall(ZoneBase):
         """Check stack cards of empty."""
         return True if not self.cards else False
 
-    def get_current_card(self):
-        """Return current card."""
-        return self.cards[self.current_card]
+    def get_card(self, index):
+        """Return card in current row for index."""
+        return self.cards[index]
 
 
 class ZoneDeck(ZoneBase):
@@ -110,9 +110,9 @@ class ZoneDeck(ZoneBase):
         """Check stack cards of empty."""
         return True if not self.cards else False
 
-    def get_current_card(self):
-        """Return current card."""
-        return self.cards[self.current_card]
+    def get_card(self, index):
+        """Return card in current row for index."""
+        return self.cards[index]
 
 
 class ZoneIncoming(ZoneBase):
@@ -152,9 +152,9 @@ class ZoneIncoming(ZoneBase):
         """Check stack cards of empty."""
         return True if not self.cards else False
 
-    def get_current_card(self):
-        """Return current card."""
-        return self.cards[self.current_card]
+    def get_card(self, index):
+        """Return card in current row for index."""
+        return self.cards[index]
 
 
 class ZoneHouse(ZoneBase):
@@ -200,9 +200,9 @@ class ZoneHouse(ZoneBase):
         """Check stack cards of empty."""
         return True if not self.rows[self.current_row] else False
 
-    def get_current_card(self):
-        """Return current card."""
-        return self.rows[self.current_row][self.current_card]
+    def get_card(self, index):
+        """Return card in current row for index."""
+        return self.rows[self.current_row][index]
 
 
 class ZoneColumns(ZoneBase):
@@ -255,9 +255,9 @@ class ZoneColumns(ZoneBase):
         """Check stack cards of empty."""
         return True if not self.rows[self.current_row] else False
 
-    def get_current_card(self):
-        """Return current card."""
-        return self.rows[self.current_row][self.current_card]
+    def get_card(self, index):
+        """Return card in current row for index."""
+        return self.rows[self.current_row][index]
 
 
 def get_zones():
