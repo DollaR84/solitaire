@@ -63,9 +63,9 @@ class ZoneRecall(ZoneBase):
         """Clear cards stack."""
         self.cards.clear()
 
-    def if_empty(self, index):
+    def if_empty(self):
         """Check stack cards of empty."""
-        return True if self.cards else False
+        return True if not self.cards else False
 
     def get_current_card(self):
         """Return current card."""
@@ -106,9 +106,9 @@ class ZoneDeck(ZoneBase):
         """Clear cards stack."""
         self.cards.clear()
 
-    def if_empty(self, index):
+    def if_empty(self):
         """Check stack cards of empty."""
-        return True if self.cards else False
+        return True if not self.cards else False
 
     def get_current_card(self):
         """Return current card."""
@@ -148,9 +148,9 @@ class ZoneIncoming(ZoneBase):
         """Clear cards stack."""
         self.cards.clear()
 
-    def if_empty(self, index):
+    def if_empty(self):
         """Check stack cards of empty."""
-        return True if self.cards else False
+        return True if not self.cards else False
 
     def get_current_card(self):
         """Return current card."""
@@ -196,9 +196,9 @@ class ZoneHouse(ZoneBase):
         for row in self.rows:
             row.clear()
 
-    def if_empty(self, index):
+    def if_empty(self):
         """Check stack cards of empty."""
-        return True if self.rows[index] else False
+        return True if not self.rows[self.current_row] else False
 
     def get_current_card(self):
         """Return current card."""
@@ -251,9 +251,9 @@ class ZoneColumns(ZoneBase):
         for row in self.rows:
             row.clear()
 
-    def if_empty(self, index):
+    def if_empty(self):
         """Check stack cards of empty."""
-        return True if self.rows[index] else False
+        return True if not self.rows[self.current_row] else False
 
     def get_current_card(self):
         """Return current card."""
