@@ -24,7 +24,10 @@ class ZoneBase:
         self.OFFSET_COLS = offset_cols
         self.color = Colors.YELLOW
         self.offset_zone = (self.LEFT, self.TOP)
+        self.clear()
 
+    def clear(self):
+        """Clear variable for new game."""
         self.current_row = 0
         self.current_card = -1
 
@@ -61,6 +64,7 @@ class ZoneRecall(ZoneBase):
 
     def clear(self):
         """Clear cards stack."""
+        super().clear()
         self.cards.clear()
 
     def if_empty(self):
@@ -104,6 +108,7 @@ class ZoneDeck(ZoneBase):
 
     def clear(self):
         """Clear cards stack."""
+        super().clear()
         self.cards.clear()
 
     def if_empty(self):
@@ -146,6 +151,7 @@ class ZoneIncoming(ZoneBase):
 
     def clear(self):
         """Clear cards stack."""
+        super().clear()
         self.cards.clear()
 
     def if_empty(self):
@@ -193,6 +199,7 @@ class ZoneHouse(ZoneBase):
 
     def clear(self):
         """Clear cards stack."""
+        super().clear()
         for row in self.rows:
             row.clear()
 
@@ -248,6 +255,7 @@ class ZoneColumns(ZoneBase):
 
     def clear(self):
         """Clear cards stack."""
+        super().clear()
         for row in self.rows:
             row.clear()
 
