@@ -24,7 +24,6 @@ class ZoneBase:
         self.OFFSET_COLS = offset_cols
         self.color = Colors.YELLOW
         self.offset_zone = (self.LEFT, self.TOP)
-        self.clear()
 
     def clear(self):
         """Clear variable for new game."""
