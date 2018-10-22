@@ -12,11 +12,12 @@ import xml.etree.ElementTree as etree
 
 import loader
 
-from zones import get_zones
-
 from card import Card
 
+from constants import Cards
 from constants import Colors
+
+from zones import get_zones
 
 
 class Board:
@@ -59,7 +60,7 @@ class Board:
         self.delivery = 3 if '3' == self.config.get('board', 'delivery') else 1
         deck_count = 36 if 'half' == self.config.get('board', 'deck') else 52
 
-        for suit in ['club', 'diamond', 'heart', 'spade']:
+        for suit in Cards.suits:
             for rate in range(1, 14):
                 if 36 == deck_count:
                     if 1 < rate < 6:

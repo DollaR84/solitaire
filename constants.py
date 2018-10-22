@@ -18,3 +18,10 @@ class Colors:
     GREEN = (0, 255, 0)
     BLUE = (0, 0, 255)
     YELLOW = (255, 255, 0)
+
+
+class Cards:
+    """Contain play cards constants."""
+    black_suits = ['club', 'spade']
+    red_suits = ['diamond', 'heart']
+    suits = black_suits + red_suits
