@@ -161,10 +161,10 @@ class Game:
 
     def help(self):
         """Speak help for keys control game."""
-        file_name = 'help_' + self.config.get('total', 'language') + '.txt'
-        with open(file_name, 'r', encoding='utf8') as help_file:
-            data = help_file.readlines()
-            for line in [line for line in data if '\n' != line]:
+        language = self.config.get('total', 'language')
+        with open('help.dat', 'rb') as help_file:
+            data = pickle.load(help_file)
+            for line in [line for line in data[language] if '\n' != line]:
                 self.speech.speak(line)
                 time.sleep(0.1)
 
