@@ -97,6 +97,7 @@ class Player:
                     self.__speak_card()
                 else:
                     zone.current_row += 1
+                    zone.current_card = -1
                     self.speak()
         elif Actions.ChangeRowDown == action:
             if zone.if_rows:
@@ -105,6 +106,7 @@ class Player:
                     self.__speak_card()
                 else:
                     zone.current_row -= 1
+                    zone.current_card = -1
                     self.speak()
 
     def __change_card(self, action, zone):
