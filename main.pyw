@@ -80,6 +80,7 @@ class Game:
             pygame.display.flip()
 
         self.speech.speak(self.phrases['finish'])
+        self.speech.finish()
         pygame.quit()
 
     def handle_events(self):
