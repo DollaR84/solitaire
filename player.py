@@ -62,7 +62,12 @@ class Player:
             self.speech.speak(self.phrases['empty'])
         else:
             if card.status:
-                rate = str(card.rate_index) if 1 < card.rate_index < 11 else self.phrases[card.rate]
+                if 52 == self.board.deck_count:
+                    rate = str(card.rate_index) if 1 < card.rate_index < 11 else self.phrases[card.rate]
+                else:
+                    rate = str(card.rate_index) if card.rate_index < 11 else self.phrases[card.rate]
+                    if 'ace' == card.rate:
+                        rate = self.phrases[card.rate]
                 self.speech.speak(' '.join((rate, self.phrases[card.suit])))
             else:
                 self.speech.speak(self.phrases['close'])

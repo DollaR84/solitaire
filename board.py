@@ -58,14 +58,14 @@ class Board:
         """Create all cards."""
         self.deck.clear()
         self.delivery = 3 if '3' == self.config.get('board', 'delivery') else 1
-        deck_count = 36 if 'half' == self.config.get('board', 'deck') else 52
+        self.deck_count = 36 if 'half' == self.config.get('board', 'deck') else 52
 
         for suit in Cards.suits:
             for rate in range(1, 14):
-                if 36 == deck_count:
+                if 36 == self.deck_count:
                     if 1 < rate < 6:
                         continue
-                self.deck.append(Card(rate, suit, self.card_x, self.card_y, deck_count))
+                self.deck.append(Card(rate, suit, self.card_x, self.card_y, self.deck_count))
 
         for card in self.deck:
             card.tex_face = self.textures[card.tex_name]
