@@ -65,7 +65,7 @@ class Board:
                 if 36 == deck_count:
                     if 1 < rate < 6:
                         continue
-                self.deck.append(Card(rate, suit, self.card_x, self.card_y))
+                self.deck.append(Card(rate, suit, self.card_x, self.card_y, deck_count))
 
         for card in self.deck:
             card.tex_face = self.textures[card.tex_name]

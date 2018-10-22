@@ -16,7 +16,7 @@ class Card:
     rate = property(lambda self: self.__RATE_NAME)
     suit = property(lambda self: self.__SUIT)
 
-    def __init__(self, rate, suit, width, height):
+    def __init__(self, rate, suit, width, height, deck_count):
         """Initialize card class."""
         self.__RATE = rate
         self.__SUIT = suit
@@ -36,6 +36,10 @@ class Card:
         else:
             self.__RATE_NAME = 'ace' if 1 == self.__RATE else str(self.__RATE)
             self.tex_name = '_'.join([self.__SUIT, str(self.__RATE)])
+
+        if 36 == deck_count:
+            if 1 == self.__RATE:
+                self.__RATE = 5
 
         self.tex_face = None
         self.tex_back = None
