@@ -9,6 +9,8 @@ Created on 08.09.2018
 
 import pygame
 
+import checker
+
 from constants import Colors
 
 
@@ -210,6 +212,22 @@ class ZoneHouse(ZoneBase):
         """Return card in current row for index."""
         return self.rows[self.current_row][index]
 
+    def take(self, cards, old_list):
+        """Check take card for put row."""
+        if len(cards) == 1:
+            if 'ace' == cards[0].rate:
+                if self.if_empty():
+                    self.rows[self.current_row].append(cards[0])
+                    old_list.remove(cards[0])
+                    return True
+            else:
+                if not self.if_empty():
+                    if cards[0].rate_index-1 == self.get_card(-1).rate_index:
+                        self.rows[self.current_row].append(cards[0])
+                        old_list.remove(cards[0])
+                        return True
+        return False
+
 
 class ZoneColumns(ZoneBase):
     """Columns zone class for solitaires."""
@@ -244,7 +262,9 @@ class ZoneColumns(ZoneBase):
 
     def get_coord_card(self, row_index, index):
         """Return coord x and y card in row stack."""
-        index_first_open = self.rows[row_index].index(next(card for card in self.rows[row_index] if card.status))
+        for index_first_open, card in enumerate(self.rows[row_index]):
+            if card.status:
+                break
         offset_close_cards = index_first_open * self.OFFSET
         if self.rows[row_index][index].status:
             offset = (self.OFFSET_COLS+row_index*(self.card_size[0]+self.OFFSET_COLS), self.OFFSET_COLS+offset_close_cards+(index-index_first_open)*self.OFFSET_OPEN)
@@ -265,6 +285,22 @@ class ZoneColumns(ZoneBase):
     def get_card(self, index):
         """Return card in current row for index."""
         return self.rows[self.current_row][index]
+
+    def take(self, cards, old_list):
+        """Check take card for put row."""
+        if self.if_empty():
+            if 'king' == cards[0].rate:
+                for card in cards:
+                    self.rows[self.current_row].append(card)
+                    old_list.remove(card)
+                return True
+            return False
+        elif checker.change_suit(cards[0], self.get_card(-1)) and cards[0].rate_index+1 == self.get_card(-1).rate_index:
+            for card in cards:
+                self.rows[self.current_row].append(card)
+                old_list.remove(card)
+            return True
+        return False
 
 
 def get_zones():
