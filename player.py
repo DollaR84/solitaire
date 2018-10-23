@@ -34,6 +34,7 @@ class Player:
         """Reset current variables."""
         self.current_zone = 0
         self.__took = False
+        self.take_card = None
 
     def draw(self):
         """Draw method for player."""
@@ -150,13 +151,16 @@ class Player:
                         if result and len(self.__take_cards_list) > 0:
                             self.__open_card(self.__take_cards_list[-1])
                         self.__took = False
+                        self.take_card.take = False
                     elif 'columns' == zone.NAME:
                         result = self.board.zones[4].take(self.__take_cards, self.__take_cards_list)
                         if result and len(self.__take_cards_list) > 0:
                             self.__open_card(self.__take_cards_list[-1])
                         self.__took = False
+                        self.take_card.take = False
                     else:
                         self.__took = False
+                        self.take_card.take = False
                 else:
                     cards = zone.rows[zone.current_row] if zone.if_rows else zone.cards
                     card = zone.get_card(zone.current_card)
@@ -164,6 +168,8 @@ class Player:
                     if checker.change_suits(self.__take_cards) and checker.rate_down(self.__take_cards):
                         self.__take_cards_list = cards
                         self.__took = True
+                        self.take_card = card
+                        self.take_card.take = True
                 self.board.sounds.play('take')
                 self.__speak_card()
 
