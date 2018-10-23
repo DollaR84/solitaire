@@ -130,7 +130,7 @@ class Game:
 
     def draw(self):
         """Main draw function."""
-        self.screen.fill(Colors.GRAY)
+        self.screen.fill(Colors.CHARTREUSE)
         self.board.draw()
         if self.game_over:
             if self.win:
