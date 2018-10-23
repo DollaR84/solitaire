@@ -203,7 +203,7 @@ class Player:
                 self.__speak_card()
                 return True
             while not self.board.zones[2].if_empty():
-                card = self.board.zones[2].cards.pop()
+                card = self.board.zones[2].cards.pop(0)
                 self.board.zones[0].cards.append(card)
                 self.__open_card(card, False)
             while not zone.if_empty():
@@ -220,7 +220,7 @@ class Player:
                 self.__speak_card()
                 return True
             while not self.board.zones[2].if_empty():
-                card = self.board.zones[2].cards.pop()
+                card = self.board.zones[2].cards.pop(0)
                 self.board.zones[0].cards.append(card)
                 self.__open_card(card, False)
             for _ in range(self.board.delivery):
