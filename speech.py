@@ -54,7 +54,7 @@ class Speech:
 
     def set_speak_out(self):
         """Set speak out: tolk or sapi."""
-        if self.sapi and self.error:
+        if self.error and self.sapi:
             self.speak = self.speak_sapi
         else:
             self.speak = self.speak_tolk
