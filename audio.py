@@ -29,8 +29,6 @@ class Sound:
     def play(self, name):
         """Play sound by name."""
         channel = self.__sounds[name].play()
-        while channel.get_busy():
-            pygame.time.delay(100)
 
 
 class Music:
