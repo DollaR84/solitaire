@@ -130,11 +130,11 @@ class Game:
 
     def draw(self):
         """Main draw function."""
-        self.screen.fill(Colors.GREEN)
+        self.screen.fill(Colors.DARKGREEN)
         self.board.draw()
         if self.game_over:
             if self.win:
-                textSurfaceObj = self.fontObj.render(self.phrases['win'], True, Colors.CHARTREUSE)
+                textSurfaceObj = self.fontObj.render(self.phrases['win'], True, Colors.GREEN)
             else:
                 textSurfaceObj = self.fontObj.render(self.phrases['game_over'], True, Colors.RED)
             textRectObj = textSurfaceObj.get_rect()
