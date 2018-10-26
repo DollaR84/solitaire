@@ -49,7 +49,7 @@ class ZoneRecall(ZoneBase):
     def draw(self, screen):
         """Draw zone on board."""
         left, top = self.get_coord_zero(0)
-        self.zone.fill(Colors.CHARTREUSE)
+        self.zone.fill(Colors.GREEN)
         pygame.draw.rect(self.zone, self.color, (left, top, self.card_size[0], self.card_size[1]), 1)
         for index, card in enumerate(self.cards):
             offset = self.get_coord_card(0, index)
@@ -94,7 +94,7 @@ class ZoneDeck(ZoneBase):
     def draw(self, screen):
         """Draw zone on board."""
         left, top = self.get_coord_zero(0)
-        self.zone.fill(Colors.CHARTREUSE)
+        self.zone.fill(Colors.GREEN)
         pygame.draw.rect(self.zone, self.color, (left, top, self.card_size[0], self.card_size[1]), 1)
         for index, card in enumerate(self.cards):
             offset = self.get_coord_card(0, index)
@@ -139,7 +139,7 @@ class ZoneIncoming(ZoneBase):
 
     def draw(self, screen):
         """Draw zone on board."""
-        self.zone.fill(Colors.CHARTREUSE)
+        self.zone.fill(Colors.GREEN)
         for index, card in enumerate(self.cards):
             offset = self.get_coord_card(0, index)
             card.draw(self.zone, offset)
@@ -185,7 +185,7 @@ class ZoneHouse(ZoneBase):
 
     def draw(self, screen):
         """Draw zone on board."""
-        self.zone.fill(Colors.CHARTREUSE)
+        self.zone.fill(Colors.GREEN)
         for row_index, row in enumerate(self.rows):
             left, top = self.get_coord_zero(row_index)
             pygame.draw.rect(self.zone, self.color, (left, top, self.card_size[0], self.card_size[1]), 1)
@@ -252,7 +252,7 @@ class ZoneColumns(ZoneBase):
 
     def draw(self, screen):
         """Draw zone on board."""
-        self.zone.fill(Colors.CHARTREUSE)
+        self.zone.fill(Colors.GREEN)
         for row_index, row in enumerate(self.rows):
             left, top = self.get_coord_zero(row_index)
             pygame.draw.rect(self.zone, self.color, (left, top, self.card_size[0], self.card_size[1]), 1)
