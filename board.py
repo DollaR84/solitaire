@@ -117,15 +117,15 @@ class Board:
             card.status = False
             self.zones[1].cards.append(card)
             self.sounds.play('deal')
-            time.sleep(0.1)
+            time.sleep(0.05)
 
         for start_row in range(len(self.zones[4].rows)):
             for row in range(start_row, len(self.zones[4].rows)):
                 self.zones[4].rows[row].append(self.zones[1].cards.pop())
                 self.sounds.play('distrib')
-                time.sleep(0.1)
+                time.sleep(0.05)
 
         for row in range(len(self.zones[4].rows)):
             self.zones[4].rows[row][-1].status = True
             self.sounds.play('open')
-            time.sleep(0.1)
+            time.sleep(0.05)
