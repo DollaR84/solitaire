@@ -124,9 +124,11 @@ class Game:
                 elif pygame.K_SPACE == event.key and pygame.key.get_mods() & pygame.KMOD_SHIFT:
                     if not self.game_over:
                         self.player.actions(Actions.Drop)
+                        self.check_win()
                 elif pygame.K_SPACE == event.key:
                     if not self.game_over:
                         self.player.actions(Actions.Take)
+                        self.check_win()
 
     def draw(self):
         """Main draw function."""
@@ -148,6 +150,17 @@ class Game:
         if self.config.getboolean('audio', 'music'):
             name = random.choice(self.music.get_music_names())
             self.music.play(name)
+
+    def check_win(self):
+        """Check win game."""
+        all_kings = 0
+        for row in self.board.zones[3].rows:
+            if row and 'king' == row[-1].rate:
+                all_kings += 1
+        if 4 == all_kings:
+            self.game_over = True
+            self.win = True
+            self.speech.speak(self.phrases['win'])
 
     def new_game(self):
         """Start new game."""
