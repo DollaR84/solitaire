@@ -44,7 +44,7 @@ def __thread_svg2png(svg_string, svg_start_pos, svg_card_size, defs_string):
                 offset_x = float(elem.attrib['x'])
                 offset_y = float(elem.attrib['y'])
                 break
-        root.set('viewBox', '{} {} {} {}'.format(svg_start_pos[0]+offset_x, svg_start_pos[1]+offset_y, svg_card_size[0], svg_card_size[1]))
+        root.set('viewBox', '{} {} {} {}'.format(svg_start_pos[0] + offset_x, svg_start_pos[1] + offset_y, svg_card_size[0], svg_card_size[1]))
         g.append(svg)
         png = cairosvg.svg2png(bytestring=etree.tostring(root))
         return (svg.attrib['id'], png)

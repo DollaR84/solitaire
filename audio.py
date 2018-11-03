@@ -10,9 +10,9 @@ Created on 04.09.2018
 import io
 import time
 
-import pygame
-
 import loader
+
+import pygame
 
 
 class Sound:
@@ -28,7 +28,7 @@ class Sound:
 
     def play(self, name):
         """Play sound by name."""
-        channel = self.__sounds[name].play()
+        self.__sounds[name].play()
 
 
 class Music:

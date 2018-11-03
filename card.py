@@ -7,13 +7,14 @@ Created on 27.08.2018
 
 """
 
-import pygame
-
 from constants import Colors
+
+import pygame
 
 
 class Card:
     """Card class for solitaires."""
+
     rate_index = property(lambda self: self.__RATE)
     rate = property(lambda self: self.__RATE_NAME)
     suit = property(lambda self: self.__SUIT)

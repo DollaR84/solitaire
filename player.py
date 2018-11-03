@@ -9,11 +9,11 @@ Created on 19.10.2018
 
 import enum
 
-import pygame
-
 import checker
 
 from constants import Colors
+
+import pygame
 
 
 Actions = enum.Enum('Actions', 'ChangeZoneUp ChangeZoneDown ChangeRowUp ChangeRowDown ChangeCardUp ChangeCardDown Take Drop')
@@ -50,7 +50,7 @@ class Player:
         name = self.phrases[self.board.zones[self.current_zone].NAME]
         row = ''
         if self.board.zones[self.current_zone].if_rows:
-            row = self.phrases['column'] + ' ' + str(self.board.zones[self.current_zone].current_row+1)
+            row = self.phrases['column'] + ' ' + str(self.board.zones[self.current_zone].current_row + 1)
         self.speech.speak(' '.join((name, row)))
         self.__speak_card()
 
@@ -98,7 +98,7 @@ class Player:
         """Change row in zone up or down."""
         if Actions.ChangeRowUp == action:
             if zone.if_rows:
-                if len(zone.rows) == zone.current_row+1:
+                if len(zone.rows) == zone.current_row + 1:
                     self.speech.speak(self.phrases['border'])
                     self.__speak_card()
                 else:
@@ -122,7 +122,7 @@ class Player:
                 if zone.get_card(0) == zone.get_card(zone.current_card):
                     self.speech.speak(self.phrases['border'])
                     self.__speak_card()
-                elif zone.get_card(zone.current_card-1).status:
+                elif zone.get_card(zone.current_card - 1).status:
                     zone.current_card -= 1
                     self.speak()
                 else:
@@ -194,7 +194,7 @@ class Player:
                 for row in range(len(self.board.zones[3].rows)):
                     row_cards = self.board.zones[3].rows[row]
                     if row_cards:
-                        if card.suit == row_cards[-1].suit and rate_index-1 == row_cards[-1].rate_index:
+                        if card.suit == row_cards[-1].suit and rate_index - 1 == row_cards[-1].rate_index:
                             row_cards.append(cards.pop())
                             if cards:
                                 self.__open_card(cards[-1])

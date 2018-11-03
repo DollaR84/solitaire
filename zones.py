@@ -7,11 +7,11 @@ Created on 08.09.2018
 
 """
 
-import pygame
-
 import checker
 
 from constants import Colors
+
+import pygame
 
 
 class ZoneBase:
@@ -58,11 +58,11 @@ class ZoneRecall(ZoneBase):
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
-        return (self.OFFSET_COLS, self.HEIGHT-self.OFFSET_COLS-self.card_size[1])
+        return (self.OFFSET_COLS, self.HEIGHT - self.OFFSET_COLS - self.card_size[1])
 
     def get_coord_card(self, row_index, index):
         """Return coord x and y card in row stack."""
-        return (self.OFFSET_COLS+index*self.OFFSET, self.HEIGHT-self.OFFSET_COLS-self.card_size[1]-index*self.OFFSET)
+        return (self.OFFSET_COLS + index * self.OFFSET, self.HEIGHT - self.OFFSET_COLS - self.card_size[1] - index * self.OFFSET)
 
     def clear(self):
         """Clear cards stack."""
@@ -103,11 +103,11 @@ class ZoneDeck(ZoneBase):
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
-        return (self.OFFSET_COLS, self.HEIGHT-self.OFFSET_COLS-self.card_size[1])
+        return (self.OFFSET_COLS, self.HEIGHT - self.OFFSET_COLS - self.card_size[1])
 
     def get_coord_card(self, row_index, index):
         """Return coord x and y card in row stack."""
-        return (self.OFFSET_COLS+index*self.OFFSET, self.HEIGHT-self.OFFSET_COLS-self.card_size[1]-index*self.OFFSET)
+        return (self.OFFSET_COLS + index * self.OFFSET, self.HEIGHT - self.OFFSET_COLS - self.card_size[1] - index * self.OFFSET)
 
     def clear(self):
         """Clear cards stack."""
@@ -147,11 +147,11 @@ class ZoneIncoming(ZoneBase):
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
-        return (self.OFFSET_COLS, self.HEIGHT-self.OFFSET_COLS-self.card_size[1])
+        return (self.OFFSET_COLS, self.HEIGHT - self.OFFSET_COLS - self.card_size[1])
 
     def get_coord_card(self, row_index, index):
         """Return coord x and y card in row stack."""
-        return (self.OFFSET_COLS+index*self.OFFSET_OPEN, self.HEIGHT-self.OFFSET_COLS-self.card_size[1])
+        return (self.OFFSET_COLS + index * self.OFFSET_OPEN, self.HEIGHT - self.OFFSET_COLS - self.card_size[1])
 
     def clear(self):
         """Clear cards stack."""
@@ -196,11 +196,11 @@ class ZoneHouse(ZoneBase):
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
-        return (self.OFFSET_COLS+index*(self.card_size[0]+self.OFFSET_COLS), self.HEIGHT-self.OFFSET_COLS-self.card_size[1])
+        return (self.OFFSET_COLS + index * (self.card_size[0] + self.OFFSET_COLS), self.HEIGHT - self.OFFSET_COLS - self.card_size[1])
 
     def get_coord_card(self, row_index, index):
         """Return coord x and y card in row stack."""
-        return (self.OFFSET_COLS+row_index*(self.card_size[0]+self.OFFSET_COLS)+index*self.OFFSET, self.HEIGHT-self.OFFSET_COLS-self.card_size[1]-index*self.OFFSET)
+        return (self.OFFSET_COLS + row_index * (self.card_size[0] + self.OFFSET_COLS) + index * self.OFFSET, self.HEIGHT - self.OFFSET_COLS - self.card_size[1] - index * self.OFFSET)
 
     def clear(self):
         """Clear cards stack."""
@@ -226,7 +226,7 @@ class ZoneHouse(ZoneBase):
                     return True
             else:
                 if not self.if_empty():
-                    if cards[0].rate_index-1 == self.get_card(-1).rate_index:
+                    if cards[0].rate_index - 1 == self.get_card(-1).rate_index:
                         self.rows[self.current_row].append(cards[0])
                         old_list.remove(cards[0])
                         return True
@@ -263,7 +263,7 @@ class ZoneColumns(ZoneBase):
 
     def get_coord_zero(self, index):
         """Return coord x and y empty row."""
-        return (self.OFFSET_COLS+index*(self.card_size[0]+self.OFFSET_COLS), self.OFFSET_COLS)
+        return (self.OFFSET_COLS + index * (self.card_size[0] + self.OFFSET_COLS), self.OFFSET_COLS)
 
     def get_coord_card(self, row_index, index):
         """Return coord x and y card in row stack."""
@@ -272,9 +272,9 @@ class ZoneColumns(ZoneBase):
                 break
         offset_close_cards = index_first_open * self.OFFSET
         if self.rows[row_index][index].status:
-            offset = (self.OFFSET_COLS+row_index*(self.card_size[0]+self.OFFSET_COLS), self.OFFSET_COLS+offset_close_cards+(index-index_first_open)*self.OFFSET_OPEN)
+            offset = (self.OFFSET_COLS + row_index * (self.card_size[0] + self.OFFSET_COLS), self.OFFSET_COLS + offset_close_cards + (index - index_first_open) * self.OFFSET_OPEN)
         else:
-            offset = (self.OFFSET_COLS+row_index*(self.card_size[0]+self.OFFSET_COLS), self.OFFSET_COLS+index*self.OFFSET)
+            offset = (self.OFFSET_COLS + row_index * (self.card_size[0] + self.OFFSET_COLS), self.OFFSET_COLS + index * self.OFFSET)
         return offset
 
     def clear(self):
@@ -300,7 +300,7 @@ class ZoneColumns(ZoneBase):
                     old_list.remove(card)
                 return True
             return False
-        elif checker.change_suit(cards[0], self.get_card(-1)) and cards[0].rate_index+1 == self.get_card(-1).rate_index:
+        elif checker.change_suit(cards[0], self.get_card(-1)) and cards[0].rate_index + 1 == self.get_card(-1).rate_index:
             for card in cards:
                 self.rows[self.current_row].append(card)
                 old_list.remove(card)

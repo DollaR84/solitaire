@@ -11,12 +11,11 @@ import random
 import time
 import xml.etree.ElementTree as etree
 
-import loader
-
 from card import Card
 
 from constants import Cards
-from constants import Colors
+
+import loader
 
 from zones import get_zones
 
@@ -42,13 +41,13 @@ class Board:
         root = self.svg.getroot()
         viewBox = [float(param) for param in root.attrib['viewBox'].split(' ')]
         START_POS = (viewBox[0], viewBox[1])
-        CARD_SIZE = (viewBox[2]/CARD_COL, viewBox[3]/CARD_ROW)
+        CARD_SIZE = (viewBox[2] / CARD_COL, viewBox[3] / CARD_ROW)
         prefix = "{http://www.w3.org/2000/svg}"
-        cards_iter = root.iterfind('./'+prefix+'g/')
-        defs_iter = root.iterfind('./'+prefix+'defs/')
+        cards_iter = root.iterfind('./' + prefix + 'g/')
+        defs_iter = root.iterfind('./' + prefix + 'defs/')
         self.defs = {obj.attrib['id']: obj for obj in defs_iter}
         self.svg_cards = {card.attrib['id']: card for card in cards_iter}
-        joker_addons = [elem for elem in self.svg_cards['joker_black'].findall('./') if prefix+'g' == elem.tag]
+        joker_addons = [elem for elem in self.svg_cards['joker_black'].findall('./') if prefix + 'g' == elem.tag]
         for addon in joker_addons:
             self.svg_cards['joker_red'].append(addon)
         self.textures = loader.textures(self.svg_cards, START_POS, CARD_SIZE, self.defs, self.card_x, self.card_y)
@@ -78,7 +77,6 @@ class Board:
     def create_zones(self):
         """Create all gaming zones."""
         screen_x = self.config.getint('screen', 'size_x')
-        screen_y = self.config.getint('screen', 'size_y')
         offset_card_total = self.config.getint('board', 'offset_card_total')
         offset_card_open = self.config.getint('board', 'offset_card_open')
         offset_cols = self.config.getint('board', 'offset_cols')
@@ -98,7 +96,7 @@ class Board:
             elif 3 == index:
                 width = 14 * offset_cols + 7 * self.card_x + 7 * 7 * offset_card_total
                 left = (screen_x - width) // 2
-                top = 2 * offset_cols + self.card_y +51 * offset_card_total
+                top = 2 * offset_cols + self.card_y + 51 * offset_card_total
 
     def clear_zones(self):
         """Clear all zones card stack."""

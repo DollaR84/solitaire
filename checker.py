@@ -21,8 +21,8 @@ def change_suit(card1, card2):
 def change_suits(cards):
     """Check change suits cards."""
     for index, card in enumerate(cards):
-        if (len(cards)-1) > index:
-            if not change_suit(card, cards[index+1]):
+        if (len(cards) - 1) > index:
+            if not change_suit(card, cards[index + 1]):
                 return False
     return True
 
@@ -30,7 +30,7 @@ def change_suits(cards):
 def rate_down(cards):
     """Check down rate index cards."""
     for index, card in enumerate(cards):
-        if (len(cards)-1) > index:
-            if cards[index+1].rate_index != card.rate_index-1:
+        if (len(cards) - 1) > index:
+            if cards[index + 1].rate_index != card.rate_index - 1:
                 return False
     return True
