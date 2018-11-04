@@ -1,0 +1,16 @@
+[flake8]
+
+ignore =
+        # line too long
+        E501,
+        # module level import not at top of file
+        E402
+
+exclude =
+         .git,
+         __pycache__,
+         docs/source/conf.py,
+         Tolk.py,
+         old,
+         build,
+         dist
