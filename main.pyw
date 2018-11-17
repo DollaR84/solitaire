@@ -11,6 +11,7 @@ import multiprocessing
 
 from game import Game
 
+
 if __name__ == '__main__':
     multiprocessing.freeze_support()
     game = Game()
