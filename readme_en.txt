@@ -10,6 +10,7 @@ F2 - on/off music;
 F3 - change bust deck by 1 or by 3 cards;
 F4 - change deck 36 or 52 cards;
 F5 - new game;
+F9 - change language;
 Tab - change zone;
 Shift+Tab - change zone reverse;
 Space - take card or put if card took;
