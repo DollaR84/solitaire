@@ -175,7 +175,7 @@ class ZoneHouse(ZoneBase):
         super().__init__(left, top, card_size, offset[0], offset_cols)
         self.NAME = 'house'
         self.if_rows = True
-        self.WIDTH = 5 * offset_cols + 4 * card_size[0] + 12 * offset[0]
+        self.WIDTH = 5 * offset_cols + 4 * card_size[0] + 4 * 12 * offset[0]
         self.HEIGHT = 2 * offset_cols + card_size[1] + 51 * offset[0]
         self.zone = pygame.Surface((self.WIDTH, self.HEIGHT))
 
