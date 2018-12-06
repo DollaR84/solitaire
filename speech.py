@@ -8,6 +8,7 @@ Created on 22.11.2018
 """
 
 import sys
+import time
 
 import Tolk
 
@@ -70,3 +71,4 @@ class Speech:
         """Speak phrase in sapi voice."""
         self.speaker.skip("Sentence", sys.maxsize)
         self.speaker.Speak(phrase, self.SVSFlagsAsync)
+        time.sleep(0.1)
