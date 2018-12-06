@@ -7,6 +7,8 @@ Created on 22.11.2018
 
 """
 
+import sys
+
 import Tolk
 
 import win32com.client
@@ -19,6 +21,7 @@ class Speech:
         """Initialize speech class."""
         self.config = config
 
+        self.SVSFlagsAsync = 1
         self.speaker = win32com.client.Dispatch("Sapi.SpVoice")
         self.voices = self.speaker.GetVoices()
         self.voices_ids = [voice.Id for voice in self.voices]
@@ -65,4 +68,5 @@ class Speech:
 
     def speak_sapi(self, phrase):
         """Speak phrase in sapi voice."""
-        self.speaker.Speak(phrase)
+        self.speaker.skip("Sentence", sys.maxsize)
+        self.speaker.Speak(phrase, self.SVSFlagsAsync)
