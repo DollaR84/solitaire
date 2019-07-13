@@ -45,14 +45,15 @@ class Player:
             left, top = zone.get_coord_card(zone.current_row, zone.current_card)
         pygame.draw.rect(zone.zone, self.color, (left, top, self.board.card_x, self.board.card_y), 1)
 
-    def speak(self):
+    def speak(self, changed_zone=False):
         """Speak information for moving cell."""
         name = self.phrases[self.board.zones[self.current_zone].NAME]
         row = ''
         if self.board.zones[self.current_zone].if_rows:
             row = self.phrases['column'] + ' ' + str(self.board.zones[self.current_zone].current_row + 1)
-        self.speech.speak(' '.join((name, row)))
         self.__speak_card()
+        if changed_zone:
+            self.speech.speak(' '.join((name, row)))
 
     def __speak_card(self, card=None):
         """Speak additionaly information for card."""
@@ -86,13 +87,13 @@ class Player:
                 self.current_zone = 0
             else:
                 self.current_zone += 1
-            self.speak()
+            self.speak(True)
         elif Actions.ChangeZoneDown == action:
             if 0 == self.current_zone:
                 self.current_zone = 4
             else:
                 self.current_zone -= 1
-            self.speak()
+            self.speak(True)
 
     def __change_row(self, action, zone):
         """Change row in zone up or down."""
